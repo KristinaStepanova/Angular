@@ -48,19 +48,13 @@ publisher2.subscribe(
 //task 3 ---> task1
 
 //task 4
-
-let arr = [];
-
-for(let i = 0; i < 10; i++) {
-    arr.push(Math.round(Math.random() * 10))
-}
-
-const publisher3 = create((observer) => {
+function getFromObserver(arr) {
+    const publisher3 = create((observer) => {
         arr.forEach(item => {
             observer.next(item);
         });
         observer.complete();
-    })
+    });
 
     const subscriber = publisher3.subscribe(
         (val) => {
@@ -72,33 +66,37 @@ const publisher3 = create((observer) => {
         () => {
             console.log('observer is dead');
         }
-    )
-
-// task 5
-
-let arr = [];
-let del = 0;
-for (let i = 0; i < 10; i++) {
-    arr.push(Math.round(Math.random() * 10))
+    );
+    return publisher3;
 }
 
-const publisher3 = create((observer) => {
-    arr.forEach(item => {
-        del = Math.round((Math.random() * 10)) * 1000;
-        setTimeout(() => {
-            observer.next(item);
-        }, del);
-    });
-})
+getFromObserver([1, 9, 56, 3, 0, 5, 67, 34]);
 
-const subscriber = publisher3.subscribe(
-    (val) => {
-        console.log(val);
-    },
-    (err) => {
-        console.log('error');
-    },
-    () => {
-        console.log('observer is dead');
-    }
-)
+// task 5
+function getFromWithDelay(arr, del) {
+    const publisher4 = create((observer) => {
+        arr.forEach(item => {
+            del = Math.round((Math.random() * 10)) * 1000;
+            setTimeout(() => {
+                observer.next(item);
+            }, del);
+        });
+    });
+
+    const subscriber = publisher4.subscribe(
+        (val) => {
+            console.log(val);
+        },
+        (err) => {
+            console.log('error');
+        },
+        () => {
+            console.log('observer is dead');
+        }
+    );
+    return publisher4;
+}
+
+getFromWithDelay([1, 9, 56, 3, 0, 5, 67, 34], 0);
+
+
