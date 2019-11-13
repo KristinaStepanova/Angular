@@ -55,8 +55,12 @@ function getFromObserver(arr) {
         });
         observer.complete();
     });
+    
+    return publisher3;
+}
 
-    const subscriber = publisher3.subscribe(
+getFromObserver([1, 9, 56, 3, 0, 5, 67, 34])
+    .subscribe(
         (val) => {
             console.log(val);
         },
@@ -67,10 +71,6 @@ function getFromObserver(arr) {
             console.log('observer is dead');
         }
     );
-    return publisher3;
-}
-
-getFromObserver([1, 9, 56, 3, 0, 5, 67, 34]);
 
 // task 5
 function getFromWithDelay(arr, del) {
@@ -82,8 +82,12 @@ function getFromWithDelay(arr, del) {
             }, del);
         });
     });
+    
+    return publisher4;
+}
 
-    const subscriber = publisher4.subscribe(
+getFromWithDelay([1, 9, 56, 3, 0, 5, 67, 34], 0)
+    .subscribe(
         (val) => {
             console.log(val);
         },
@@ -94,9 +98,3 @@ function getFromWithDelay(arr, del) {
             console.log('observer is dead');
         }
     );
-    return publisher4;
-}
-
-getFromWithDelay([1, 9, 56, 3, 0, 5, 67, 34], 0);
-
-
