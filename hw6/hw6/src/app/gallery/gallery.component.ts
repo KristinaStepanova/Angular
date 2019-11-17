@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-gallery-component',
     template: `
     <div class="gallery">
-        <app-image-component></app-image-component>
-        <app-image-component></app-image-component>
-        <app-image-component></app-image-component>
-        <app-image-component></app-image-component>
+        <img *ngFor="let image of images" [src]="'/assets/' + image" (click)="zoomImg(image)">
     </div>
     `,
     styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent {
-    
+    images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+
+    @Output() onZoomImg = new EventEmitter<string>(); 
+
+    zoomImg(image: string): void {
+        this.onZoomImg.emit(image);
+    }
 }

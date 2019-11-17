@@ -1,17 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-image-component',
     template: `
-        <img [style.width]="bigSize ? '100%' : '50%'" [src]="imagePath" (click)="zoomImage()">
+        <img [src]="imagePath">
     `
 })
 export class ImageComponent {
-    public imagePath = '../../assets/image1.jpg';
-
-    public bigSize = false;
-
-    public zoomImage(): void {
-        this.bigSize = !this.bigSize;
-    }
+    @Input() imagePath: string;
 }
